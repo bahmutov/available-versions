@@ -21,6 +21,7 @@
     "jshint-solid": "^0.2.0",
     "jshint-stylish": "^0.1.5",
     "matchdep": "^0.3.0",
+    "pre-git": "0.0.15",
     "time-grunt": "^0.2.10"
   },
   "homepage": "https://github.com/bahmutov/available-versions",
@@ -32,6 +33,7 @@
   ],
   "license": "MIT",
   "main": "index.js",
+  "pre-commit": "npm test",
   "repository": {
     "type": "git",
     "url": "git@github.com:bahmutov/available-versions.git"

@@ -2,6 +2,13 @@
 
 Fetches new versions for a given NPM package higher than given version.
 
+[![NPM][available-versions-icon]][available-versions-url]
+
+[![Build status][ci-image]][ci-url]
+[![Coverage Status][available-versions-coverage-image]][available-versions-coverage-url]
+[![dependencies][dependencies-image]][dependencies-url]
+[![dev dependencies][dev-dependencies-image]][dev-dependencies-url]
+
 ## example
 
     node index.js deps-ok@0.0.5
@@ -55,3 +62,14 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
+
+[available-versions-icon]: https://nodei.co/npm/available-versions.png?downloads=true
+[available-versions-url]: https://npmjs.org/package/available-versions
+[ci-image]: https://travis-ci.org/bahmutov/available-versions.png?branch=master
+[ci-url]: https://travis-ci.org/bahmutov/available-versions
+[available-versions-coverage-image]: https://coveralls.io/repos/bahmutov/available-versions/badge.png
+[available-versions-coverage-url]: https://coveralls.io/r/bahmutov/available-versions
+[dependencies-image]: https://david-dm.org/bahmutov/available-versions.png
+[dependencies-url]: https://david-dm.org/bahmutov/available-versions
+[dev-dependencies-image]: https://david-dm.org/bahmutov/available-versions/dev-status.png
+[dev-dependencies-url]: https://david-dm.org/bahmutov/available-versions#info=devDependencies

@@ -77,6 +77,11 @@ function queryRegistry(query, npmUrl) {
 // https://github.com/jprichardson/npm-latest
 // returns a promise
 function fetchVersions(query) {
+  if (typeof query === 'string') {
+    query = {
+      name: query
+    };
+  }
   verify.object(query, 'expected {name, version}');
   return registryUrl().then(queryRegistry.bind(null, query));
 }

@@ -1,33 +1,42 @@
 {
   "name": "available-versions",
-  "version": "0.0.0",
   "description": "Returns a promise with new versions higher than given for a npm module",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "version": "0.0.0",
+  "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/bahmutov/available-versions/issues"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:bahmutov/available-versions.git"
+  "dependencies": {
+    "check-types": "^1.2.0",
+    "lodash": "^2.4.1",
+    "npm-utils": "0.0.6",
+    "q": "^1.0.1",
+    "request": "^2.34.0",
+    "semver": "^2.2.1"
   },
+  "devDependencies": {
+    "grunt": "^0.4.4",
+    "grunt-contrib-jshint": "^0.9.2",
+    "grunt-nice-package": "^0.2.3",
+    "jshint-solid": "^0.2.0",
+    "jshint-stylish": "^0.1.5",
+    "matchdep": "^0.3.0",
+    "time-grunt": "^0.2.10"
+  },
+  "homepage": "https://github.com/bahmutov/available-versions",
   "keywords": [
     "npm",
     "version",
     "available",
     "check"
   ],
-  "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/bahmutov/available-versions/issues"
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:bahmutov/available-versions.git"
   },
-  "homepage": "https://github.com/bahmutov/available-versions",
-  "dependencies": {
-    "request": "^2.34.0",
-    "q": "^1.0.1",
-    "check-types": "^1.2.0",
-    "semver": "^2.2.1",
-    "npm-utils": "0.0.6",
-    "lodash": "^2.4.1"
+  "scripts": {
+    "test": "grunt"
   }
 }

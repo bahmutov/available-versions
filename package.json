@@ -23,7 +23,9 @@
     "jshint-stylish": "^0.1.5",
     "matchdep": "^0.3.0",
     "pre-git": "0.0.15",
-    "time-grunt": "^0.2.10"
+    "time-grunt": "^0.2.10",
+    "lcov-filter": "0.0.1",
+    "coveralls": "^2.8.0"
   },
   "homepage": "https://github.com/bahmutov/available-versions",
   "keywords": [
@@ -41,6 +43,7 @@
   },
   "scripts": {
     "test": "grunt && npm run unit",
-    "unit": "node node_modules/gt/gt.js src/test/*.js"
+    "unit": "node node_modules/gt/gt.js src/test/*.js",
+    "coveralls": "node node_modules/lcov-filter/index.js cover/lcov.info test | ./node_modules/coveralls/bin/coveralls.js"
   }
 }

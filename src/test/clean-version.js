@@ -22,5 +22,5 @@ gt.test('clean version with 2 digits', function () {
 gt.test('clean latest versions', function () {
   // TODO use console.pop to grab output and check for error message
   var cleaned = clean('latest', 'gt');
-  gt.equal(cleaned, 'latest', 'kept same version');
+  gt.undefined(cleaned, 'returns undefined when cannot clean');
 });

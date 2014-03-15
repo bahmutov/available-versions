@@ -42,7 +42,7 @@ function cleanVersion(version, name) {
   var cleaned = clean(version);
   if (!cleaned) {
     console.error('could not clean version', version, 'for', name);
-    return version;
+    return;
   }
   return cleaned;
 }

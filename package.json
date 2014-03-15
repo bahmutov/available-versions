@@ -1,7 +1,7 @@
 {
   "name": "available-versions",
   "description": "Returns a promise with new versions higher than given for a npm module",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "bugs": {
     "url": "https://github.com/bahmutov/available-versions/issues"
@@ -15,17 +15,17 @@
     "semver": "^2.2.1"
   },
   "devDependencies": {
+    "coveralls": "^2.8.0",
     "grunt": "^0.4.4",
     "grunt-contrib-jshint": "^0.9.2",
     "grunt-nice-package": "^0.2.3",
     "gt": "^0.8.34",
     "jshint-solid": "^0.2.0",
     "jshint-stylish": "^0.1.5",
+    "lcov-filter": "0.0.1",
     "matchdep": "^0.3.0",
     "pre-git": "0.0.15",
-    "time-grunt": "^0.2.10",
-    "lcov-filter": "0.0.1",
-    "coveralls": "^2.8.0"
+    "time-grunt": "^0.2.10"
   },
   "homepage": "https://github.com/bahmutov/available-versions",
   "keywords": [

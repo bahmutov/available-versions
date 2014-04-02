@@ -9,8 +9,12 @@ if (module.parent) {
     version: name.split('@')[1]
   };
 
-  available(query).then(function (versions) {
+  available(query).then(function (result) {
+    console.assert(typeof result === 'object');
+    console.assert(result.name === query.name);
+    console.assert(Array.isArray(result.versions), 'expected array, got ' +
+      JSON.stringify(result.versions, null, 2));
     console.log('available versions for', name);
-    console.log(versions);
+    console.log(result.versions);
   }).done();
 }

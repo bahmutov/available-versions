@@ -23,6 +23,20 @@ without `@version` fetches all versions for given name.
     { name: 'console.json',
       versions: [ '0.0.0', '0.1.0', '0.1.1' ]
 
+## API
+
+You can use this module from other modules
+
+    var available = require('available-versions');
+    var query = {
+      name: 'deps-ok',
+      version: '0.1.0' // version is optional
+    };
+    available(query).then(function (result) {
+      console.log(result.name);
+      console.log(result.versions); // array of versions
+    });
+
 ### Small print
 
 Author: Gleb Bahmutov &copy; 2014

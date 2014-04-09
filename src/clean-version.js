@@ -45,12 +45,12 @@ function clean(version) {
   return version;
 }
 
-function cleanVersion(version, name) {
+function cleanVersion(version, name, silent) {
   verify.unemptyString(version, 'missing version string' + version);
   verify.unemptyString(name, 'missing name string' + name);
   var cleaned = clean(version);
   if (!cleaned) {
-    if (!isKeyword(version)) {
+    if (!isKeyword(version) && !silent) {
       console.error('could not clean version', version, 'for', name);
     }
     return;

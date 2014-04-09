@@ -4,7 +4,7 @@ gt.module('clean-version');
 var clean = require('../clean-version');
 
 gt.test('basic', function () {
-  gt.arity(clean, 2, 'function expecting 2 arguments');
+  gt.arity(clean, 3, 'function expecting N arguments');
 });
 
 gt.test('clean 1.2.0', function () {

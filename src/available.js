@@ -10,7 +10,7 @@ var _registryUrl = require('npm-utils').registryUrl;
 verify.fn(_registryUrl, 'expected registry url function');
 var registryUrl = _.once(_registryUrl);
 
-function queryRegistry(query, npmUrl) {
+function queryRegistry(query, silent, npmUrl) {
   verify.object(query, 'expected {name, version}');
   var name = query.name;
   verify.string(name, 'missing name string');
@@ -49,7 +49,7 @@ function queryRegistry(query, npmUrl) {
       }
 
       var validVersions = versions.filter(function (ver) {
-        return cleanVersion(ver, name);
+        return cleanVersion(ver, name, silent);
       });
       if (query.version) {
         verify.string(query.version, 'missing version string, have ' + query.version);
@@ -76,14 +76,14 @@ function queryRegistry(query, npmUrl) {
 // fetching versions inspired by
 // https://github.com/jprichardson/npm-latest
 // returns a promise
-function fetchVersions(query) {
+function fetchVersions(query, silent) {
   if (typeof query === 'string') {
     query = {
       name: query
     };
   }
   verify.object(query, 'expected {name, version}');
-  return registryUrl().then(queryRegistry.bind(null, query));
+  return registryUrl().then(queryRegistry.bind(null, query, !!silent));
 }
 
 module.exports = fetchVersions;

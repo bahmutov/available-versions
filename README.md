@@ -37,6 +37,10 @@ You can use this module from other modules
       console.log(result.versions); // array of versions
     });
 
+You can also pass second argument to keep version cleanup error messages quiet
+
+    available(query, true) ...
+
 ### Small print
 
 Author: Gleb Bahmutov &copy; 2014

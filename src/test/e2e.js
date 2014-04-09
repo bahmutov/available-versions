@@ -2,7 +2,7 @@
 var available = require('../../index');
 
 gt.async('deps-ok', function () {
-  gt.arity(available, 1);
+  gt.arity(available, 2);
   available({
     name: 'deps-ok'
   }).then(function (info) {

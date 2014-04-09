@@ -13,7 +13,7 @@ function isKeyword(version) {
     !!versionKeywords[version];
 }
 
-function clean(version) {
+function clean(version, silent) {
   var originalVersion = version;
   verify.unemptyString(version, 'missing version string' + version);
 
@@ -39,7 +39,9 @@ function clean(version) {
     return;
   }
   if (!version) {
-    console.error('could not clean version ' + originalVersion);
+    if (!silent) {
+      console.error('could not clean version ' + originalVersion);
+    }
     return;
   }
   return version;
@@ -48,7 +50,7 @@ function clean(version) {
 function cleanVersion(version, name, silent) {
   verify.unemptyString(version, 'missing version string' + version);
   verify.unemptyString(name, 'missing name string' + name);
-  var cleaned = clean(version);
+  var cleaned = clean(version, silent);
   if (!cleaned) {
     if (!isKeyword(version) && !silent) {
       console.error('could not clean version', version, 'for', name);

@@ -8,7 +8,7 @@
   },
   "contributors": [],
   "dependencies": {
-    "check-types": "1.3.0",
+    "check-types": "1.4.0",
     "lodash": "2.4.1",
     "npm-utils": "0.0.8",
     "q": "2.0.2",

@@ -3,6 +3,12 @@
   "description": "Returns a promise with new versions higher than given for a npm module",
   "version": "0.0.0-semantic-release",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
+  "bin": {
+    "available": "bin/available.js",
+    "versions": "bin/available.js",
+    "vers": "bin/available.js",
+    "releases": "bin/available.js"
+  },
   "bugs": {
     "url": "https://github.com/bahmutov/available-versions/issues"
   },
@@ -32,10 +38,12 @@
     "npm-utils": "1.0.0",
     "q": "1.4.1",
     "request": "2.67.0",
-    "semver": "5.1.0"
+    "semver": "5.1.0",
+    "simple-bin-help": "1.5.0"
   },
   "devDependencies": {
     "coveralls": "2.11.4",
+    "git-issues": "1.2.0",
     "grunt": "0.4.5",
     "grunt-cli": "0.1.13",
     "grunt-contrib-jshint": "0.11.3",
@@ -75,8 +83,9 @@
     "url": "https://github.com/bahmutov/available-versions.git"
   },
   "scripts": {
-    "commit": "commit-wizard",
+    "commit": "git-issues && commit-wizard",
     "coveralls": "node node_modules/lcov-filter/index.js cover/lcov.info test | ./node_modules/coveralls/bin/coveralls.js",
+    "issues": "git-issues",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
     "test": "grunt && npm run unit",

@@ -1,21 +1,21 @@
 var request = require('request');
-var check = require('check-types');
-var verify = check.verify;
+var la = require('lazy-ass');
+var check = require('check-more-types');
 var semver = require('semver');
 var q = require('q');
 var cleanVersion = require('./clean-version');
 var _ = require('lodash');
 
 var _registryUrl = require('npm-utils').registryUrl;
-verify.fn(_registryUrl, 'expected registry url function');
+la(check.fn(_registryUrl), 'expected registry url function');
 var registryUrl = _.once(_registryUrl);
 
 function queryRegistry(query, silent, npmUrl) {
-  verify.object(query, 'expected {name, version}');
+  la(check.object(query), 'expected {name, version}');
   var name = query.name;
-  verify.string(name, 'missing name string');
+  la(check.string(name), 'missing name string');
 
-  verify.webUrl(npmUrl, 'need npm registry url, got ' + npmUrl);
+  la(check.webUrl(npmUrl), 'need npm registry url, got', npmUrl);
   npmUrl = npmUrl.replace(/^https:/, 'http:').trim();
   var url = npmUrl + name;
 
@@ -52,7 +52,7 @@ function queryRegistry(query, silent, npmUrl) {
         return cleanVersion(ver, name, silent);
       });
       if (query.version) {
-        verify.string(query.version, 'missing version string, have ' + query.version);
+        la(check.string(query.version), 'missing version string, have', query.version);
         validVersions = validVersions.filter(function (ver) {
           var later = semver.gt(ver, query.version);
           return later;
@@ -82,7 +82,7 @@ function fetchVersions(query, silent) {
       name: query
     };
   }
-  verify.object(query, 'expected {name, version}');
+  la(check.object(query), 'expected {name, version}');
   return registryUrl().then(queryRegistry.bind(null, query, !!silent));
 }
 

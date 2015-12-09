@@ -2,6 +2,10 @@
 
 'use strict';
 
+const la = require('lazy-ass');
+const check = require('check-more-types');
+require('console.table');
+
 var help = [
   'USE: jso <property name prefix>',
   '    "jso v" === "cat package.json | grep version"'
@@ -33,7 +37,27 @@ const options = {
   version: version
 };
 
+function versionToInfo(v) {
+  return {
+    version: v
+  };
+}
+
+function printReleases(query, releases) {
+  la(check.object(releases), 'wrong releases', releases);
+
+  la(check.unemptyString(releases.name), 'missing name in', releases);
+
+  la(check.array(releases.versions), 'no versions in', releases);
+  const humanInfo = releases.versions.map(versionToInfo);
+
+  const title = options.version ?
+    releases.name + ' since ' + options.version :
+    releases.name;
+  console.table(title, humanInfo);
+}
+
 available(options, hideDebugOutput)
-  .then(console.log.bind(console))
+  .then(printReleases.bind(null, options))
   .done();
 

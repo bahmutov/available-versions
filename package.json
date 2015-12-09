@@ -61,7 +61,7 @@
     "node": ">= 0.8.0"
   },
   "files": [
-    "index.js",
+    "bin",
     "src",
     "!src/test"
   ],
@@ -77,7 +77,8 @@
     "versions"
   ],
   "license": "MIT",
-  "main": "index.js",
+  "main": "src/available.js",
+  "preferGlobal": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/bahmutov/available-versions.git"

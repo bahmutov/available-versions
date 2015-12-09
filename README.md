@@ -11,19 +11,20 @@ Fetches new versions for a given NPM package higher than given version.
 [![semantic-release][semantic-image] ][semantic-url]
 [![manpm](https://img.shields.io/badge/manpm-%E2%9C%93-3399ff.svg)](https://github.com/bahmutov/manpm)
 
-## example
+## Install and use
 
-    node index.js deps-ok@0.0.5
-    available versions for deps-ok@0.0.5
-    { name: 'deps-ok',
-      versions: [ '0.0.6', '0.0.7', '0.0.8', '0.2.0', '0.2.1', '0.3.0' ] }
+    npm install -g available-versions
 
-without `@version` fetches all versions for given name.
+Installs several aliases, use any one you like `available`, `versions`, `vers` or `releases`
 
-    node index.js console.json
-    available versions for console.json
-    { name: 'console.json',
-      versions: [ '0.0.0', '0.1.0', '0.1.1' ]
+What are all releases for library `lazy-ass`?
+
+    releases lazy-ass
+
+What are new releases after `1.0.0`?
+
+    releases lazy-ass@1.0.0
+    releases lazy-ass 1.0.0
 
 ## API
 

@@ -1,5 +1,5 @@
 /* global gt */
-var available = require('../../index');
+var available = require('../..');
 
 gt.async('deps-ok', function () {
   gt.arity(available, 2);

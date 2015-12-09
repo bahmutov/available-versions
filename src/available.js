@@ -23,6 +23,16 @@ function queryRegistry(query, silent, npmUrl) {
 
   request.get(url, onNPMversions);
 
+  function getTimestamps(info, versions) {
+    if (!check.object(info.time)) {
+      return;
+    }
+    la(check.array(versions), 'expected list of versions', versions);
+    return versions.map(function (v) {
+      return info.time[v];
+    });
+  }
+
   function onNPMversions(err, response, body) {
     if (err) {
       console.error('ERROR when fetching info for package', name);
@@ -38,12 +48,10 @@ function queryRegistry(query, silent, npmUrl) {
         deferred.reject(str);
         return;
       }
-      var versions;
-      if (info.time) {
-        versions = Object.keys(info.time);
-      } else if (info.versions) {
-        versions = Object.keys(info.versions);
-      }
+      var versionObject = info.versions || info.time;
+      la(check.object(versionObject), 'could not find versions in', info);
+
+      var versions = Object.keys(versionObject);
       if (!Array.isArray(versions)) {
         throw new Error('Could not get versions for ' + name + ' from ' + info);
       }
@@ -51,6 +59,7 @@ function queryRegistry(query, silent, npmUrl) {
       var validVersions = versions.filter(function (ver) {
         return cleanVersion(ver, name, silent);
       });
+
       if (query.version) {
         la(check.string(query.version), 'missing version string, have', query.version);
         validVersions = validVersions.filter(function (ver) {
@@ -59,10 +68,14 @@ function queryRegistry(query, silent, npmUrl) {
         });
       }
 
+      var timestamps = getTimestamps(info, validVersions);
+
       deferred.resolve({
         name: name,
-        versions: validVersions
+        versions: validVersions,
+        timestamps: timestamps
       });
+
       return;
     } catch (err) {
       console.error(err);

@@ -1,8 +1,8 @@
 {
   "name": "available-versions",
   "description": "Returns a promise with new versions higher than given for a npm module",
-  "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "version": "0.0.0-semantic-release",
+  "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "bugs": {
     "url": "https://github.com/bahmutov/available-versions/issues"
   },

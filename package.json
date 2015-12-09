@@ -9,7 +9,9 @@
   "config": {
     "pre-git": {
       "commit-msg": "simple",
-      "pre-commit": [],
+      "pre-commit": [
+        "npm test"
+      ],
       "pre-push": [],
       "post-commit": [],
       "post-merge": []
@@ -29,7 +31,7 @@
     "grunt": "0.4.5",
     "grunt-cli": "0.1.13",
     "grunt-contrib-jshint": "0.11.3",
-    "grunt-nice-package": "0.10.1",
+    "grunt-nice-package": "0.10.2",
     "gt": "0.9.1",
     "jshint-solid": "0.2.2",
     "jshint-stylish": "2.1.0",
@@ -51,7 +53,6 @@
   ],
   "license": "MIT",
   "main": "index.js",
-  "pre-commit": "npm test",
   "repository": {
     "type": "git",
     "url": "https://github.com/bahmutov/available-versions.git"

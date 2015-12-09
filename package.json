@@ -6,6 +6,15 @@
   "bugs": {
     "url": "https://github.com/bahmutov/available-versions/issues"
   },
+  "config": {
+    "pre-git": {
+      "commit-msg": "simple",
+      "pre-commit": [],
+      "pre-push": [],
+      "post-commit": [],
+      "post-merge": []
+    }
+  },
   "contributors": [],
   "dependencies": {
     "check-types": "1.4.0",
@@ -35,10 +44,10 @@
   },
   "homepage": "https://github.com/bahmutov/available-versions",
   "keywords": [
-    "npm",
-    "version",
     "available",
-    "check"
+    "check",
+    "npm",
+    "version"
   ],
   "license": "MIT",
   "main": "index.js",
@@ -48,19 +57,10 @@
     "url": "https://github.com/bahmutov/available-versions.git"
   },
   "scripts": {
-    "test": "grunt && npm run unit",
-    "unit": "gt src/test/*.js",
+    "commit": "commit-wizard",
     "coveralls": "node node_modules/lcov-filter/index.js cover/lcov.info test | ./node_modules/coveralls/bin/coveralls.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "commit": "commit-wizard"
-  },
-  "config": {
-    "pre-git": {
-      "commit-msg": "simple",
-      "pre-commit": [],
-      "pre-push": [],
-      "post-commit": [],
-      "post-merge": []
-    }
+    "test": "grunt && npm run unit",
+    "unit": "gt src/test/*.js"
   }
 }

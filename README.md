@@ -8,6 +8,8 @@ Fetches new versions for a given NPM package higher than given version.
 [![Coverage Status][available-versions-coverage-image]][available-versions-coverage-url]
 [![dependencies][dependencies-image]][dependencies-url]
 [![dev dependencies][dev-dependencies-image]][dev-dependencies-url]
+[![semantic-release][semantic-image] ][semantic-url]
+[![manpm](https://img.shields.io/badge/manpm-%E2%9C%93-3399ff.svg)](https://github.com/bahmutov/manpm)
 
 ## example
 
@@ -47,7 +49,7 @@ Author: Gleb Bahmutov &copy; 2014
 
 * [@bahmutov](https://twitter.com/bahmutov)
 * [glebbahmutov.com](http://glebbahmutov.com)
-* [blog](http://bahmutov.calepin.co/)
+* [blog](http://glebbahmutov.com/blog)
 
 License: MIT - do anything with the code, but don't blame me if it does not work.
 
@@ -91,3 +93,5 @@ OTHER DEALINGS IN THE SOFTWARE.
 [dependencies-url]: https://david-dm.org/bahmutov/available-versions
 [dev-dependencies-image]: https://david-dm.org/bahmutov/available-versions/dev-status.png
 [dev-dependencies-url]: https://david-dm.org/bahmutov/available-versions#info=devDependencies
+[semantic-image]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
+[semantic-url]: https://github.com/semantic-release/semantic-release

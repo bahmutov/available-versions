@@ -10,7 +10,7 @@ function printReleases(options, releases) {
   la(is.unemptyString(releases.name), 'missing name in', releases);
 
   la(is.array(releases.versions), 'no versions in', releases);
-  const humanInfo = toHumanFormat(releases.versions, releases.timestamps);
+  const humanInfo = toHumanFormat(releases);
   la(is.array(humanInfo), 'could not construct human output from', releases);
 
   const title = options.version ?

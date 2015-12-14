@@ -15,23 +15,9 @@ require('simple-bin-help')({
   help: help
 });
 
-var name = process.argv[2];
-var version = process.argv[3]; // optional
+const options = require('../src/split-version')(process.argv[2], process.argv[3]);
+
 var hideDebugOutput = true;
-
-function hasAt(s) {
-  return s.indexOf('@') !== -1;
-}
-
-if (hasAt(name) && !version) {
-  name = process.argv[2].split('@')[0];
-  version = process.argv[2].split('@')[1];
-}
-
-const options = {
-  name: name,
-  version: version
-};
 
 const printReleases = require('../src/print-releases');
 

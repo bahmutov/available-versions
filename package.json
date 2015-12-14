@@ -21,7 +21,9 @@
     "pre-git": {
       "commit-msg": "simple",
       "pre-commit": [
-        "npm test"
+        "npm test",
+        "npm run example",
+        "npm run example-scoped"
       ],
       "pre-push": [
         "npm run size"
@@ -56,6 +58,7 @@
     "lcov-filter": "0.1.1",
     "matchdep": "1.0.0",
     "pre-git": "3.0.0",
+    "rocha": "1.6.1",
     "semantic-release": "6.0.3",
     "time-grunt": "1.2.2"
   },
@@ -90,11 +93,13 @@
     "commit": "git-issues && commit-wizard",
     "coveralls": "node node_modules/lcov-filter/index.js cover/lcov.info test | ./node_modules/coveralls/bin/coveralls.js",
     "example": "node --harmony bin/available.js manpm",
+    "example-scoped": "Q_DEBUG=1 node --harmony bin/available.js @bahmutov/parse-github-repo-url",
     "example-tags": "node --harmony bin/available.js publish-tag",
     "issues": "git-issues",
+    "rocha": "rocha src/*-spec.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
-    "test": "grunt && npm run unit",
+    "test": "npm run rocha && grunt && npm run unit",
     "unit": "gt src/test/*.js"
   }
 }

@@ -10,14 +10,21 @@ var _registryUrl = require('npm-utils').registryUrl;
 la(check.fn(_registryUrl), 'expected registry url function');
 var registryUrl = _.once(_registryUrl);
 
-function queryRegistry(query, silent, npmUrl) {
-  la(check.object(query), 'expected {name, version}');
-  var name = query.name;
-  la(check.string(name), 'missing name string');
+function formUrl(npmUrl, name) {
+  la(check.unemptyString(name), 'missing name string', name);
 
   la(check.webUrl(npmUrl), 'need npm registry url, got', npmUrl);
   npmUrl = npmUrl.replace(/^https:/, 'http:').trim();
-  var url = npmUrl + name;
+
+  // for scoped package names that have @user/foo
+  var url = npmUrl + name.replace('/', '%2f');
+  return url;
+}
+
+function queryRegistry(query, silent, npmUrl) {
+  la(check.object(query), 'expected {name, version}');
+  var name = query.name;
+  var url = formUrl(npmUrl, name);
 
   var deferred = q.defer();
 
@@ -36,16 +43,15 @@ function queryRegistry(query, silent, npmUrl) {
   function onNPMversions(err, response, body) {
     if (err) {
       console.error('ERROR when fetching info for package', name);
-      deferred.reject(err.message);
-      return;
+      return deferred.reject(new Error(err.message));
     }
 
     try {
       var info = JSON.parse(body);
       if (info.error) {
-        var str = 'ERROR in npm info for ' + name + ' reason ' + info.reason;
+        var str = 'ERROR in npm info for ' + name + ' reason ' + (info.reason || body);
         console.error(str);
-        deferred.reject(str);
+        deferred.reject(new Error(str));
         return;
       }
       var versionObject = info.versions || info.time;
@@ -83,9 +89,9 @@ function queryRegistry(query, silent, npmUrl) {
       });
 
       return;
-    } catch (err) {
-      console.error(err);
-      deferred.reject('Could not fetch versions for ' + name);
+    } catch (error) {
+      console.error(error);
+      deferred.reject(new Error('Could not fetch versions for ' + name));
       return;
     }
   }

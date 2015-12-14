@@ -86,8 +86,10 @@
     "url": "https://github.com/bahmutov/available-versions.git"
   },
   "scripts": {
+    "build": "grunt",
     "commit": "git-issues && commit-wizard",
     "coveralls": "node node_modules/lcov-filter/index.js cover/lcov.info test | ./node_modules/coveralls/bin/coveralls.js",
+    "example-tags": "node --harmony bin/available.js publish-tag",
     "issues": "git-issues",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",

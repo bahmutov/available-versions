@@ -69,11 +69,17 @@ function queryRegistry(query, silent, npmUrl) {
       }
 
       var timestamps = getTimestamps(info, validVersions);
+      la(check.maybe.array(timestamps),
+        'expected list of timestamps', timestamps);
+
+      la(check.maybe.object(info['dist-tags']),
+        'expected object with dist tags', info['dist-tags']);
 
       deferred.resolve({
         name: name,
         versions: validVersions,
-        timestamps: timestamps
+        timestamps: timestamps,
+        'dist-tags': info['dist-tags']
       });
 
       return;
@@ -96,7 +102,9 @@ function fetchVersions(query, silent) {
     };
   }
   la(check.object(query), 'expected {name, version}');
-  return registryUrl().then(queryRegistry.bind(null, query, !!silent));
+  var queryFn = _.partial(queryRegistry, query, Boolean(silent));
+  return registryUrl()
+    .then(queryFn);
 }
 
 module.exports = fetchVersions;

@@ -97,7 +97,7 @@
     "example-scoped": "Q_DEBUG=1 node --harmony bin/available.js @bahmutov/parse-github-repo-url",
     "example-tags": "node --harmony bin/available.js publish-tag",
     "issues": "git-issues",
-    "rocha": "rocha src/*-spec.js",
+    "rocha": "node --harmony node_modules/.bin/rocha src/*-spec.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
     "test": "npm run rocha && grunt && npm run unit",

@@ -67,7 +67,8 @@
   },
   "files": [
     "bin",
-    "src",
+    "src/*.js",
+    "!src/*-spec.js",
     "!src/test"
   ],
   "homepage": "https://github.com/bahmutov/available-versions",

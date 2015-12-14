@@ -33,14 +33,14 @@ A table with versios, timestamps and relative age
 ```
 $ vers babel@6.1.15
 babel since 6.1.15
----------------------------------------------------
-version  timestamp                          age
--------  ---------------------------------  -------
-6.1.16   Thu Nov 12 2015 16:34:40 GMT-0500  a month
-6.1.17   Thu Nov 12 2015 16:40:45 GMT-0500  a month
-6.1.18   Thu Nov 12 2015 16:46:50 GMT-0500  a month
-6.2.4    Tue Nov 24 2015 22:12:59 GMT-0500  15 days
-6.3.13   Fri Dec 04 2015 06:57:56 GMT-0500  5 days
+--------------------------
+version  age      dist-tag
+-------  -------  --------
+6.1.16   a month
+6.1.17   a month
+6.1.18   a month
+6.2.4    19 days
+6.3.13   10 days  stable
 ```
 
 ## API

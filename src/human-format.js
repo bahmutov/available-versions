@@ -11,15 +11,23 @@ const releasesSchema = {
 const isReleases = _.partial(is.schema, releasesSchema);
 
 function withoutTimestamps(releases) {
-  return _.pluck(releases.versions, 'version');
+  const vers = releases.versions;
+  if (is.arrayOf(is.semver, vers)) {
+    return vers;
+  }
+  if (is.arrayOf(is.object, vers)) {
+    la(vers.every(is.has('version')),
+      'some objects do not have version property ' +
+      JSON.stringify(releases, null, 2));
+    return _.pluck(vers, 'version');
+  }
+  throw new Error('Cannot extract versions from ' +
+    JSON.stringify(releases, null, 2));
 }
 
-function withTimestamps(versions, timestamps, distTags) {
+function withTimestamps(versions, timestamps, tags) {
   la(versions.length === timestamps.length,
     'mismatch in numbers', versions, timestamps);
-  la(is.maybe.object(distTags), 'wrong dist tags', distTags);
-
-  const tags = is.object(distTags) ? _.invert(distTags) : undefined;
 
   const now = moment();
   return versions.map(function (version, k) {
@@ -38,11 +46,15 @@ function withTimestamps(versions, timestamps, distTags) {
 function toHumanFormat(releases) {
   la(isReleases(releases), 'invalid releases', releases);
 
+  const distTags = releases['dist-tags'];
+  la(is.maybe.object(distTags), 'wrong dist tags', distTags);
+  const tags = is.object(distTags) ? _.invert(distTags) : undefined;
+
   if (!releases.timestamps) {
     return withoutTimestamps(releases);
   }
 
-  return withTimestamps(releases.versions, releases.timestamps, releases['dist-tags']);
+  return withTimestamps(releases.versions, releases.timestamps, tags);
 }
 
 module.exports = toHumanFormat;

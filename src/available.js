@@ -5,6 +5,7 @@ var semver = require('semver');
 var q = require('q');
 var cleanVersion = require('./clean-version');
 var _ = require('lodash');
+var debug = require('debug')('vers');
 
 var _registryUrl = require('npm-utils').registryUrl;
 la(check.fn(_registryUrl), 'expected registry url function');
@@ -25,6 +26,7 @@ function queryRegistry(query, silent, npmUrl) {
   la(check.object(query), 'expected {name, version}');
   var name = query.name;
   var url = formUrl(npmUrl, name);
+  debug('query npm registry', url);
 
   var deferred = q.defer();
 

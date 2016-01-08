@@ -61,6 +61,12 @@ You can also pass second argument to keep version cleanup error messages quiet
 
     available(query, true) ...
 
+## Debug
+
+To debug this program, run it with `DEBUG=vers` variable
+
+    DEBUG=vers releases chalk
+
 ### Small print
 
 Author: Gleb Bahmutov &copy; 2014

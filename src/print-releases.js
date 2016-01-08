@@ -12,7 +12,6 @@ function verifyReleases(releases) {
 
 function printReleases(options, releases) {
   verifyReleases(releases);
-  console.log(releases);
   const humanInfo = toHumanFormat(releases);
   la(is.array(humanInfo), 'could not construct human output from', releases);
   la(humanInfo.every(is.defined),

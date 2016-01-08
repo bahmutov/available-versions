@@ -3,8 +3,9 @@
 'use strict';
 
 var help = [
-  'USE: jso <property name prefix>',
-  '    "jso v" === "cat package.json | grep version"'
+  'USE: vers <module name> [start version]',
+  '    "vers chalk"',
+  '    "vers chalk 0.3.0"',
 ].join('\n');
 
 var available = require('..');

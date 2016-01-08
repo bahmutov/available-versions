@@ -10,8 +10,7 @@ module.exports = function (grunt) {
         'bin/*.js'
       ],
       options: {
-        jshintrc: '.jshintrc',
-        reporter: require('jshint-stylish')
+        jshintrc: '.jshintrc'
       }
     },
 

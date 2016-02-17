@@ -2,7 +2,7 @@ const la = require('lazy-ass');
 const is = require('check-more-types');
 
 /* global describe, it */
-describe.only('semver with tag', function () {
+describe('semver with tag', function () {
   const semverAllowTags = require('./semver-allow-tags');
 
   it('handles major.minor.patch', function () {

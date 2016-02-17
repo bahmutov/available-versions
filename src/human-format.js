@@ -2,6 +2,7 @@ const la = require('lazy-ass');
 const is = require('check-more-types');
 const moment = require('moment');
 const _ = require('lodash');
+const semverAllowTags = require('./semver-allow-tags');
 
 const releasesSchema = {
   versions: is.array,
@@ -10,9 +11,9 @@ const releasesSchema = {
 };
 const isReleases = _.partial(is.schema, releasesSchema);
 
-function withoutTimestamps(releases) {
+function versionsWithoutTimestamps(releases) {
   const vers = releases.versions;
-  if (is.arrayOf(is.semver, vers)) {
+  if (is.arrayOf(semverAllowTags, vers)) {
     return vers;
   }
   if (is.arrayOf(is.object, vers)) {
@@ -51,7 +52,7 @@ function toHumanFormat(releases) {
   const tags = is.object(distTags) ? _.invert(distTags) : undefined;
 
   if (!releases.timestamps) {
-    return withoutTimestamps(releases);
+    return versionsWithoutTimestamps(releases);
   }
 
   return withTimestamps(releases.versions, releases.timestamps, tags);

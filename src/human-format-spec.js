@@ -2,6 +2,34 @@ const la = require('lazy-ass');
 const is = require('check-more-types');
 
 /* global describe, it */
+describe('is.semver', function () {
+  it('handles clean list', function () {
+    var versions = [
+      '0.0.0',
+      '0.0.2',
+      '0.1.0'
+    ];
+    la(is.arrayOf(is.semver, versions),
+      'not sem vers', versions);
+  });
+
+  it('does not like tags', function () {
+    la(is.semver('0.0.1'), 'plain semver');
+    la(!is.semver('0.0.1-beta'), 'semver with tag');
+    la(!is.semver('5.0.0-alpha.13'), 'semver with alpha and number');
+  });
+
+  it('does not like tags in list', function () {
+    var versions = [
+      '0.0.0-semantic-release',
+      '0.0.0',
+      '0.1.0'
+    ];
+    la(!is.arrayOf(is.semver, versions),
+      'not sem vers', versions);
+  });
+});
+
 describe('human format conversion', function () {
   const toHuman = require('./human-format');
 

@@ -47,6 +47,7 @@
     "simple-bin-help": "1.5.1"
   },
   "devDependencies": {
+    "condition-node-version": "1.3.0",
     "coveralls": "2.11.6",
     "git-issues": "1.2.0",
     "grunt": "0.4.5",
@@ -103,5 +104,11 @@
     "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
     "test": "npm run rocha && grunt && npm run unit",
     "unit": "gt src/test/*.js"
+  },
+  "release": {
+    "verifyConditions": {
+      "path": "condition-node-version",
+      "node": "6"
+    }
   }
 }

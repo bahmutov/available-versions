@@ -64,7 +64,7 @@
     "time-grunt": "1.3.0"
   },
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">= 4.0.0"
   },
   "files": [
     "bin",
@@ -94,11 +94,11 @@
     "build": "grunt",
     "commit": "git-issues && commit-wizard",
     "coveralls": "node node_modules/lcov-filter/index.js cover/lcov.info test | ./node_modules/coveralls/bin/coveralls.js",
-    "example": "node --harmony bin/available.js manpm",
-    "example-scoped": "Q_DEBUG=1 node --harmony bin/available.js @bahmutov/parse-github-repo-url",
-    "example-tags": "node --harmony bin/available.js publish-tag",
+    "example": "node bin/available.js manpm",
+    "example-scoped": "Q_DEBUG=1 node bin/available.js @bahmutov/parse-github-repo-url",
+    "example-tags": "node bin/available.js publish-tag",
     "issues": "git-issues",
-    "rocha": "node --harmony node_modules/.bin/rocha src/*-spec.js",
+    "rocha": "node node_modules/.bin/rocha src/*-spec.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
     "test": "npm run rocha && grunt && npm run unit",

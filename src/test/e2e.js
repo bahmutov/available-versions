@@ -7,20 +7,20 @@ gt.async('deps-ok', function () {
     name: 'deps-ok'
   }).then(function (info) {
     gt.equal(info.name, 'deps-ok');
-  }).fail(function (err) {
+  }).catch(function (err) {
     gt.ok(false, 'cannot fetch info, error', err);
-  }).finally(function () {
+  }).then(function () {
     gt.start();
-  }).done();
+  });
 });
 
 gt.async('deps-ok as string', function () {
   available('deps-ok')
   .then(function (info) {
     gt.equal(info.name, 'deps-ok');
-  }).fail(function (err) {
+  }).catch(function (err) {
     gt.ok(false, 'cannot fetch info, error', err);
-  }).finally(function () {
+  }).then(function () {
     gt.start();
-  }).done();
+  });
 });

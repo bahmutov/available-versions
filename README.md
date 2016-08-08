@@ -109,15 +109,15 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
-[available-versions-icon]: https://nodei.co/npm/available-versions.png?downloads=true
+[available-versions-icon]: https://nodei.co/npm/available-versions.svg?downloads=true
 [available-versions-url]: https://npmjs.org/package/available-versions
-[ci-image]: https://travis-ci.org/bahmutov/available-versions.png?branch=master
+[ci-image]: https://travis-ci.org/bahmutov/available-versions.svg?branch=master
 [ci-url]: https://travis-ci.org/bahmutov/available-versions
-[available-versions-coverage-image]: https://coveralls.io/repos/bahmutov/available-versions/badge.png
+[available-versions-coverage-image]: https://coveralls.io/repos/bahmutov/available-versions/badge.svg
 [available-versions-coverage-url]: https://coveralls.io/r/bahmutov/available-versions
-[dependencies-image]: https://david-dm.org/bahmutov/available-versions.png
+[dependencies-image]: https://david-dm.org/bahmutov/available-versions.svg
 [dependencies-url]: https://david-dm.org/bahmutov/available-versions
-[dev-dependencies-image]: https://david-dm.org/bahmutov/available-versions/dev-status.png
+[dev-dependencies-image]: https://david-dm.org/bahmutov/available-versions/dev-status.svg
 [dev-dependencies-url]: https://david-dm.org/bahmutov/available-versions#info=devDependencies
 [semantic-image]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 [semantic-url]: https://github.com/semantic-release/semantic-release

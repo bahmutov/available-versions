@@ -25,6 +25,5 @@ const hideDebugOutput = true;
 const printReleases = require('../src/print-releases');
 
 available(options, hideDebugOutput)
-  .then(printReleases.bind(null, options))
-  .done();
+  .then(printReleases.bind(null, options));
 

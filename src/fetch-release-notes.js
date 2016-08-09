@@ -6,19 +6,6 @@ var check = require('check-more-types');
 var debug = require('debug')('vers');
 
 const githubUrl = 'https://api.github.com/repos/';
-// octocat/Hello-World/releases/1
-
-function getReleaseNotes(url) {
-  la(check.unemptyString(url), 'missing full url', url);
-  return request.get(url)
-    .then((r) => {
-      debug('response to', url);
-      debug(r);
-    })
-    .catch(() => {
-      debug('could not get release notes', url);
-    });
-}
 
 function fetchReleaseNotes(available) {
   debug('available', available);
@@ -29,22 +16,22 @@ function fetchReleaseNotes(available) {
   }
 
   const url = githubUrl + available.repoParsed.user + '/' +
-    available.repoParsed.repo + '/releases/v';
-  debug('creating %d fetch promises', available.versions.length);
-  const promises = available.versions.map((version) => {
-    const fullUrl = url + version;
-    return getReleaseNotes(fullUrl);
-  });
+    available.repoParsed.repo + '/releases';
+  debug(url);
 
-  return Promise.all(promises)
-    .then((results) => {
-      debug('fetched release notes');
-      debug(results);
+  return request.get(url)
+    .then(function (r) {
+      la(r.status === 200, 'received error status', r.status);
+      return r.data;
     })
-    .then(() => {
+    .then(function (list) {
+      debug('got %d releases', list.length);
+      la(check.array(list), 'expected list of releases', list);
+      la(check.positive(list.length), 'invalid releases number', list.length);
+      available.releases = list;
       return available;
     })
-    .catch((err) => {
+    .catch(function (err) {
       console.error('error fetching release notes');
       console.error(err);
       return available;

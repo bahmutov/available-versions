@@ -12,8 +12,8 @@ function getReleaseNotes(url) {
   la(check.unemptyString(url), 'missing full url', url);
   return request.get(url)
     .then((r) => {
-      console.log('response to', url);
-      console.log(r);
+      debug('response to', url);
+      debug(r);
     })
     .catch(() => {
       debug('could not get release notes', url);
@@ -21,7 +21,7 @@ function getReleaseNotes(url) {
 }
 
 function fetchReleaseNotes(available) {
-  console.log('available', available);
+  debug('available', available);
 
   if (!available.repoParsed) {
     debug('no parsed repo');
@@ -38,8 +38,8 @@ function fetchReleaseNotes(available) {
 
   return Promise.all(promises)
     .then((results) => {
-      console.log('fetched');
-      console.log(results);
+      debug('fetched release notes');
+      debug(results);
     })
     .then(() => {
       return available;

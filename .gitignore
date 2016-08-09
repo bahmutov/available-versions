@@ -1,3 +1,4 @@
 node_modules/
 cover/
 .DS_Store
+npm-debug.log

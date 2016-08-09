@@ -1,3 +1,5 @@
+'use strict';
+
 var request = require('request');
 var la = require('lazy-ass');
 var check = require('check-more-types');
@@ -6,6 +8,7 @@ var q = require('q');
 var cleanVersion = require('./clean-version');
 var _ = require('lodash');
 var debug = require('debug')('vers');
+var parseRepo = require('parse-github-repo-url');
 
 var _registryUrl = require('npm-utils').registryUrl;
 la(check.fn(_registryUrl), 'expected registry url function');
@@ -20,6 +23,12 @@ function formUrl(npmUrl, name) {
   // for scoped package names that have @user/foo
   var url = npmUrl + name.replace('/', '%2f');
   return url;
+}
+
+function isSupportedRepo(repo) {
+  return check.object(repo) &&
+    repo.type === 'git' &&
+    repo.url.indexOf('github') !== -1;
 }
 
 function queryRegistry(query, silent, npmUrl) {
@@ -48,6 +57,8 @@ function queryRegistry(query, silent, npmUrl) {
       return deferred.reject(new Error(err.message));
     }
 
+    var result = {};
+
     try {
       var info = JSON.parse(body);
       if (info.error) {
@@ -56,6 +67,17 @@ function queryRegistry(query, silent, npmUrl) {
         deferred.reject(new Error(str));
         return;
       }
+      debug('npm repo info');
+      debug(info.repository);
+      if (isSupportedRepo(info.repository)) {
+        result.repo = info.repository.url;
+        var parsed = parseRepo(info.repository.url);
+        result.repoParsed = {
+          user: parsed[0],
+          repo: parsed[1]
+        };
+      }
+
       var versionObject = info.versions || info.time;
       la(check.object(versionObject), 'could not find versions in', info);
 
@@ -83,14 +105,12 @@ function queryRegistry(query, silent, npmUrl) {
       la(check.maybe.object(info['dist-tags']),
         'expected object with dist tags', info['dist-tags']);
 
-      deferred.resolve({
-        name: name,
-        versions: validVersions,
-        timestamps: timestamps,
-        'dist-tags': info['dist-tags']
-      });
+      result.name = name;
+      result.versions = validVersions;
+      result.timestamps = timestamps;
+      result['dist-tags'] = info['dist-tags'];
 
-      return;
+      return deferred.resolve(result);
     } catch (error) {
       console.error(error);
       deferred.reject(new Error('Could not fetch versions for ' + name));

@@ -22,8 +22,12 @@ const options = require('../src/split-version')(packageName, packageVersion);
 
 const hideDebugOutput = true;
 
+const fetchReleaseNotes = require('../src/fetch-release-notes');
+
 const printReleases = require('../src/print-releases');
+const print = printReleases.bind(null, options);
 
 available(options, hideDebugOutput)
-  .then(printReleases.bind(null, options));
+  .then(fetchReleaseNotes)
+  .then(print);
 

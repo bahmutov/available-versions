@@ -29,5 +29,9 @@ const print = printReleases.bind(null, options);
 
 available(options, hideDebugOutput)
   .then(fetchReleaseNotes)
-  .then(print);
+  .then(print)
+  .catch(function (err) {
+    console.error('available versions error');
+    console.error(err);
+  });
 

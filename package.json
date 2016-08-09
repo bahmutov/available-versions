@@ -34,6 +34,7 @@
   },
   "contributors": [],
   "dependencies": {
+    "axios": "0.13.1",
     "check-more-types": "2.22.0",
     "console.table": "0.7.0",
     "debug": "2.2.0",

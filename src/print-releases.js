@@ -1,3 +1,5 @@
+'use strict';
+
 const la = require('lazy-ass');
 const is = require('check-more-types');
 require('console.table');

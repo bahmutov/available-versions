@@ -1,3 +1,5 @@
+'use strict';
+
 const la = require('lazy-ass');
 const is = require('check-more-types');
 
@@ -37,10 +39,18 @@ describe('human format conversion', function () {
     la(is.fn(toHuman));
   });
 
+  function checkProps(release) {
+    la(is.semver(release.version), 'missing version', release);
+    la(is.maybe.unemptyString(release.age), 'missing age', release);
+    la(is.maybe.unemptyString(release['dist-tag']),
+      'wrong dist tag', release);
+  }
+
   function checkOutput(human) {
     la(is.array(human), 'not array', human);
     la(human.every(is.defined),
       'found undefined entries in human formatted', human);
+    human.every(checkProps);
   }
 
   it('handles with valid timestamps', function () {
@@ -62,6 +72,7 @@ describe('human format conversion', function () {
       }
     };
     const human = toHuman(releases);
+    la(human.length === releases.versions.length, 'wrong number of versions');
     checkOutput(human);
   });
 
@@ -77,6 +88,43 @@ describe('human format conversion', function () {
       }
     };
     const human = toHuman(releases);
+    la(human.length === releases.versions.length, 'wrong number of versions');
     checkOutput(human);
+  });
+
+  it('handles just versions', function () {
+    const releases = {
+      name: 'ci-publish',
+      versions: [
+        '1.0.0', '1.0.1', '1.0.2', '1.0.3', '1.0.4', '1.1.0'
+      ]
+    };
+    const human = toHuman(releases);
+    la(human.length === releases.versions.length, 'wrong number of versions');
+    checkOutput(human);
+  });
+
+  it('adds release notes', function () {
+    const releases = {
+      name: 'ci-publish',
+      versions: [
+        '1.0.0', '1.0.1', '1.0.2', '1.0.3', '1.0.4', '1.1.0'
+      ],
+      releases: [{
+        name: 'v1.0.0',
+        body: 'first release'
+      }, {
+        name: 'v1.0.1',
+        body: 'little fix'
+      }]
+    };
+    const human = toHuman(releases);
+    la(human.length === releases.versions.length, 'wrong number of versions');
+    checkOutput(human);
+    la(human[0].version === '1.0.0',
+      'expected first version at first position', human[0]);
+    la(human[0].release,
+      'missing release notes at first position', human[0]);
+    console.log(human);
   });
 });

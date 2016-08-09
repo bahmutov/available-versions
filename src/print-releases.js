@@ -23,7 +23,9 @@ function printReleases(options, releases) {
   const title = options.version ?
     releases.name + ' since ' + options.version :
     releases.name;
-  console.table(title, humanInfo);
+  const fullTitle = releases.repo ?
+    title + ' from ' + releases.repo : title;
+  console.table(fullTitle, humanInfo);
 }
 
 module.exports = printReleases;

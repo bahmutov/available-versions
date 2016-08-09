@@ -6,6 +6,7 @@ const is = require('check-more-types');
 const moment = require('moment');
 const _ = require('lodash');
 const semverAllowTags = require('./semver-allow-tags');
+const replaceLinks = require('./replace-links');
 
 const releasesSchema = {
   versions: is.array,
@@ -57,10 +58,42 @@ function withTimestamps(versions, timestamps, tags) {
   });
 }
 
+function removeHtmlTags(s) {
+  if (s.indexOf('<') !== -1) {
+    return '';
+  }
+  return s;
+}
+
+// remove useless lines that contain the version info
+// like "## 1.1.0"
+function removeHeaderStart(s) {
+  const r = /^###? \d\d?\.\d\d?\./;
+  if (r.test(s)) {
+    return '';
+  }
+  return s;
+}
+
+// remove category?
+// #### Features or #### Bug Fixes
+// created by semantic-release
+function removeCategory(s) {
+  const r = /^#### (Features|Bug)/;
+  if (r.test(s)) {
+    return '';
+  }
+  return s;
+}
+
 function cleanReleaseNotes(notes) {
   la(is.unemptyString(notes), 'expected notes string', notes);
   const lines = notes.split('\n')
     .map((s) => s.trim())
+    .map(removeHtmlTags)
+    .map(removeHeaderStart)
+    .map(removeCategory)
+    .map(replaceLinks)
     .filter(is.unemptyString);
   return lines[0];
 }

@@ -149,6 +149,31 @@ describe('human format conversion', function () {
     la(is.unemptyString(notes), 'missing notes', human);
     la(is.not.found(notes.indexOf('second line')),
       'did not remove second line', notes);
+  });
+
+  it('removes HTML tags', function () {
+    const releases = {
+      name: 'ci-publish',
+      versions: [
+        '1.0.0'
+      ],
+      releases: [{
+        name: 'v1.0.0',
+        body: '<a name"foo">nice</a>\nfirst release\n\nsecond line\n'
+      }, {
+        name: 'v1.0.1',
+        body: 'little fix'
+      }]
+    };
+    const human = toHuman(releases);
+    la(human.length === releases.versions.length, 'wrong number of versions');
+    checkOutput(human);
+    const notes = human[0].release;
+    la(is.unemptyString(notes), 'missing notes', human);
+    la(is.not.found(notes.indexOf('nice')),
+      'did not remove html line', notes);
+    la(is.not.found(notes.indexOf('second line')),
+      'did not remove second line', notes);
     console.log(notes);
   });
 });

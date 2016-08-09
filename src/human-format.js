@@ -57,6 +57,14 @@ function withTimestamps(versions, timestamps, tags) {
   });
 }
 
+function cleanReleaseNotes(notes) {
+  la(is.unemptyString(notes), 'expected notes string', notes);
+  const lines = notes.split('\n')
+    .map((s) => s.trim())
+    .filter(is.unemptyString);
+  return lines[0];
+}
+
 /*
   returns list of releases as objects, each one being
   {
@@ -88,7 +96,7 @@ function toHumanFormat(releases) {
       }
       const release = _.find(releases.releases, versionMatch);
       if (release) {
-        r.release = release.body;
+        r.release = cleanReleaseNotes(release.body);
       }
     });
   }

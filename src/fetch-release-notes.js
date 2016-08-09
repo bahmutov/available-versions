@@ -32,8 +32,8 @@ function fetchReleaseNotes(available) {
       return available;
     })
     .catch(function (err) {
-      console.error('error fetching release notes');
-      console.error(err);
+      debug('error fetching release notes');
+      debug(err);
       return available;
     });
 }

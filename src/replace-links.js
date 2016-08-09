@@ -4,7 +4,7 @@
 // [#11](https://github.com/bahmutov/manpm/issues/11)
 // becomes just #11
 function replaceIssueLinks(s) {
-  const r = /\[(#\d+)\]\([\w:\.\/]+\)/;
+  const r = /\[(#\d+)\]\([\w:\.\-\/]+\)/;
   const match = r.exec(s);
   // console.log(match);
   if (!match) {
@@ -17,7 +17,7 @@ function replaceIssueLinks(s) {
 // ([a00ed3e7](https://github.com/bahmutov/manpm/commit/a00ed3e7))
 // with just SHA (a00ed3e7)
 function replaceLinks(s) {
-  const r = /\[([0-9a-f]{8})\]\([\w:\.\/]+\)/;
+  const r = /\[([0-9a-f]{8})\]\([\w:\.\-\/]+\)/;
   const match = r.exec(s);
   // console.log(match);
   if (!match) {

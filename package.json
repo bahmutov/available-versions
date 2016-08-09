@@ -104,6 +104,7 @@
     "commit": "git-issues && commit-wizard",
     "coveralls": "node node_modules/lcov-filter/index.js cover/lcov.info test | ./node_modules/coveralls/bin/coveralls.js",
     "example": "node bin/available.js manpm",
+    "example-babel": "node bin/available.js babel@6.1.15",
     "example-scoped": "Q_DEBUG=1 node bin/available.js @bahmutov/parse-github-repo-url",
     "example-tags": "node bin/available.js publish-tag",
     "issues": "git-issues",

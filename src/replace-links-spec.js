@@ -48,4 +48,10 @@ describe('replace links', () => {
     const r = replaceLinks(s);
     la(r === '(a360d56e, closes #11)', r);
   });
+
+  it('handles dashes', () => {
+    const s = 'release [17713ca1](https://github.com/bahmutov/lazy-ass/commit/17713ca1)';
+    const r = replaceLinks(s);
+    la(r === 'release 17713ca1', r);
+  });
 });

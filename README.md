@@ -30,9 +30,9 @@ What are new releases after `1.0.0`?
 
 ## Output
 
-A table with versios, timestamps and relative age
+A table with versions, timestamps and relative age
 
-```
+```sh
 $ vers babel@6.1.15
 babel since 6.1.15
 --------------------------
@@ -44,6 +44,26 @@ version  age      dist-tag
 6.2.4    19 days
 6.3.13   10 days  stable
 ```
+
+For most modules, it will also fetch release notes from GitHub, for example
+
+```sh
+$ vers manpm@1.10.0
+manpm since 1.10.0 from git+https://github.com/bahmutov/manpm.git
+------------------------------------------------------------------------------------------------------------
+version  age       release                                                                          dist-tag
+-------  --------  -------------------------------------------------------------------------------  --------
+1.10.1   8 months  github: parsing github url (a00ed3e7)
+1.10.2   6 months  node5: testing on node 4 and 5, fixed get, (0ffdc31a, closes #22)
+1.10.3   6 months  node: supporting older versions of node without harmony, (88ef0a4d, closes #21)
+1.10.4   6 months  log: removed extra console log statement (30d2da81)
+1.10.5   5 months  deps: upgraded a lot of deps, trying to see if #23 is still broken (2ed9051e)
+1.10.6   4 months  readme: fixed getting readme by downgrading simple-get, (e7e15a25, closes #24)   latest
+```
+
+The comments are clipped and cleaned up to be a single line, I recommend
+using [semantic-release](https://github.com/semantic-release/semantic-release)
+to make sure the output is useful.
 
 ## API
 

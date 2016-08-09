@@ -86,6 +86,25 @@ function removeCategory(s) {
   return s;
 }
 
+// if the line starts with markdown "* " removes it
+function removeMarkdownStar(s) {
+  const r = /^\* /;
+  if (r.test(s)) {
+    return s.substr(2);
+  }
+  return s;
+}
+
+function removeBoldAroundScope(s) {
+  const r = /^\*\*(\w+:)\*\* /;
+  const match = r.exec(s);
+  // console.log(match);
+  if (!match) {
+    return s;
+  }
+  return s.replace(match[0], match[1] + ' ');
+}
+
 function cleanReleaseNotes(notes) {
   la(is.unemptyString(notes), 'expected notes string', notes);
   const lines = notes.split('\n')
@@ -94,6 +113,8 @@ function cleanReleaseNotes(notes) {
     .map(removeHeaderStart)
     .map(removeCategory)
     .map(replaceLinks)
+    .map(removeMarkdownStar)
+    .map(removeBoldAroundScope)
     .filter(is.unemptyString);
   return lines[0];
 }

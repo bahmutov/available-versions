@@ -94,6 +94,13 @@ environment variable `GITLAB_AUTH_TOKEN` set with your
 GITLAB_AUTH_TOKEN=xxxyyyy vers @org/my-module
 ```
 
+I recommend using [as-a](https://github.com/bahmutov/as-a) to simplify
+using environment variables. In this case you would do something like this
+
+```sh
+as-a gitlab vers @org/my-module
+```
+
 ## Debug
 
 To debug this program, run it with `DEBUG=vers` variable

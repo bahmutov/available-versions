@@ -14,6 +14,13 @@ var _registryUrl = require('npm-utils').registryUrl;
 la(check.fn(_registryUrl), 'expected registry url function');
 var registryUrl = _.once(_registryUrl);
 
+function scopeName(name) {
+  var slash = name.indexOf('/');
+  if (name[0] === '@' && slash !== -1) {
+    return name.substr(0, slash);
+  }
+}
+
 function formUrl(npmUrl, name) {
   la(check.unemptyString(name), 'missing name string', name);
 
@@ -130,8 +137,10 @@ function fetchVersions(query, silent) {
     };
   }
   la(check.object(query), 'expected {name, version}');
+  var scope = scopeName(query.name);
+  debug('fetching versions for scope', scope);
   var queryFn = _.partial(queryRegistry, query, Boolean(silent));
-  return registryUrl()
+  return registryUrl(scope)
     .then(queryFn);
 }
 

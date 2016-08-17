@@ -112,6 +112,7 @@
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
     "test": "npm run rocha && grunt && npm run unit",
-    "unit": "gt src/test/*.js"
+    "unit": "gt src/test/*.js",
+    "lint": "grunt jshint"
   }
 }

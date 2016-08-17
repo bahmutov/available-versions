@@ -105,7 +105,7 @@ function removeBoldAroundScope(s) {
   return s.replace(match[0], match[1] + ' ');
 }
 
-function cleanReleaseNotes(notes) {
+function cleanReleaseNotesGitHub(notes) {
   la(is.unemptyString(notes), 'expected notes string', notes);
   const lines = notes.split('\n')
     .map((s) => s.trim())
@@ -117,6 +117,12 @@ function cleanReleaseNotes(notes) {
     .map(removeBoldAroundScope)
     .filter(is.unemptyString);
   return lines[0];
+}
+
+function cleanReleaseNotesGitLab(commit) {
+  la(is.object(commit), 'missing commit', commit);
+  la(is.string(commit.message), 'missing commit message in', commit);
+  return commit.message.split('\n')[0].trim();
 }
 
 /*
@@ -149,8 +155,12 @@ function toHumanFormat(releases) {
           o.name === 'v' + r.version;
       }
       const release = _.find(releases.releases, versionMatch);
+      // debug('for release %s found notes', r.version);
+      // debug(release);
+
       if (release) {
-        r.release = cleanReleaseNotes(release.body);
+        r.release = release.body ? cleanReleaseNotesGitHub(release.body)
+          : cleanReleaseNotesGitLab(release.commit);
       }
     });
   }

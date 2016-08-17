@@ -83,6 +83,17 @@ You can also pass second argument to keep version cleanup error messages quiet
 
     available(query, true) ...
 
+## Supported servers
+
+Public and private NPM registries, GitHub (public) and GitLab
+(public and private) servers. For private GitLab server, you should have
+environment variable `GITLAB_AUTH_TOKEN` set with your
+[personal access token](https://gitlab.com/profile/account).
+
+```sh
+GITLAB_AUTH_TOKEN=xxxyyyy vers @org/my-module
+```
+
 ## Debug
 
 To debug this program, run it with `DEBUG=vers` variable

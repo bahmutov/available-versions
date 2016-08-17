@@ -27,6 +27,6 @@ describe('git server url', function () {
   it('returns github url', function () {
     var git = 'git+https://github.com/bahmutov/manpm.git';
     var url = server(git);
-    la(url === 'https://github.com', url);
+    la(url === 'https://api.github.com', url);
   });
 });

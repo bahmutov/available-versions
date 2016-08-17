@@ -4,12 +4,20 @@ var request = require('axios');
 var la = require('lazy-ass');
 var check = require('check-more-types');
 var debug = require('debug')('vers');
-// var gitlab = require('gitlab');
+var parseGitServerUrl = require('./git-server-url');
 
-function urlFromGitHub(user, repo) {
-  const githubUrl = 'https://api.github.com/repos/';
-  const url = githubUrl + user + '/' + repo + '/releases';
-  return url;
+function githubRemoteApi(url, user, repo) {
+  const server = parseGitServerUrl(url);
+  la(check.unemptyString(server), 'missing remote server url from', url);
+  const apiUrl = server + '/repos/' + user + '/' + repo + '/releases';
+  return apiUrl;
+}
+
+function gitlabRemoteApi(url, user, repo) {
+  const server = parseGitServerUrl(url);
+  la(check.unemptyString(server), 'missing remote server url from', url);
+  const apiUrl = server + '/api/v3/projects/' + user + '%2F' + repo + '/repository/tags';
+  return apiUrl;
 }
 
 function isGitHub(type) {
@@ -30,31 +38,54 @@ function supportedServer(type) {
   );
 }
 
-function fetchFromGitlab(repo) {
-  la(repo.server === 'gitlab', 'invalid gitlab server', repo);
+function is200(r) {
+  la(r.status === 200, 'received error status', r.status);
+  return r.data;
 }
 
 function fetchFromGitlab(available, repo) {
   la(isGitlab(repo.server), 'invalid gitlab server', repo);
+
   debug('fetching release notes from gitlab server');
   debug(repo);
+
+  const url = gitlabRemoteApi(repo.url, repo.user, repo.repo);
+  debug('fetching releases from gitlab %s', url);
+
   if (!hasGitLabToken()) {
     console.error('Missing gitlab access token');
     return available;
   }
-  return available;
+
+  var options = {
+    method: 'GET',
+    url: url,
+    headers: {
+      'PRIVATE-TOKEN': process.env.GITLAB_AUTH_TOKEN
+    }
+  };
+  return request(options)
+    .then(is200)
+    .then(function (list) {
+      la(check.array(list), 'expected list of tags', list);
+      debug('fetched %d tags from gitlab', list.length);
+      available.releases = list;
+      return available;
+    })
+    .catch(function (err) {
+      debug('error fetching release notes from', url);
+      debug(err);
+      return available;
+    });
 }
 
 function fetchFromGitHub(available, repo) {
   la(isGitHub(repo.server), 'invalid github server', repo);
-  const url = urlFromGitHub(repo.user, repo.repo);
+  const url = githubRemoteApi(repo.url, repo.user, repo.repo);
   debug('fetching releases from github %s', url);
 
   return request.get(url)
-    .then(function (r) {
-      la(r.status === 200, 'received error status', r.status);
-      return r.data;
-    })
+    .then(is200)
     .then(function (list) {
       debug('got %d releases', list.length);
       la(check.array(list), 'expected list of releases', list);
@@ -63,7 +94,7 @@ function fetchFromGitHub(available, repo) {
       return available;
     })
     .catch(function (err) {
-      debug('error fetching release notes');
+      debug('error fetching release notes from', url);
       debug(err);
       return available;
     });

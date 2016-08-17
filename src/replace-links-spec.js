@@ -49,6 +49,13 @@ describe('replace links', () => {
     la(r === '(a360d56e, closes #11)', r);
   });
 
+  it('replaces several issue links', () => {
+    const s = 'closes [#11](https://github.com/bahmutov/manpm/issues/11),' +
+      ' and fixes [#12](https://github.com/bahmutov/manpm/issues/12)';
+    const r = replaceLinks(s);
+    la(r === 'closes #11, and fixes #12', r);
+  });
+
   it('handles dashes', () => {
     const s = 'release [17713ca1](https://github.com/bahmutov/lazy-ass/commit/17713ca1)';
     const r = replaceLinks(s);

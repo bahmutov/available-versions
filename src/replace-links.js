@@ -10,7 +10,7 @@ function replaceIssueLinks(s) {
   if (!match) {
     return s;
   }
-  return s.replace(match[0], match[1]);
+  return replaceIssueLinks(s.replace(match[0], match[1]));
 }
 
 // replace urls like

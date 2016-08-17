@@ -98,9 +98,12 @@ function queryRegistry(query, silent, npmUrl) {
         var parsed = parseRepo(info.repository.url);
         result.repoParsed = {
           user: parsed[0],
-          repo: parsed[1]
+          repo: parsed[1],
+          server: gitServerName(info.repository.url),
+          url: info.repository.url
         };
-        result.repoParsed.server = gitServerName(info.repository.url);
+        debug('parsed repo info');
+        debug(result.repoParsed);
       }
 
       var versionObject = info.versions || info.time;

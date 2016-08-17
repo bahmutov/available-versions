@@ -1,3 +1,5 @@
+'use strict';
+
 var check = require('check-more-types');
 var verify = check.verify;
 var semver = require('semver');

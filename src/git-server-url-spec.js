@@ -29,4 +29,10 @@ describe('git server url', function () {
     var url = server(git);
     la(url === 'https://api.github.com', url);
   });
+
+  it('returns github git+ssh url', function () {
+    var git = 'git+ssh://git@github.com/kensho/kensho-tickers.git';
+    var url = server(git);
+    la(url === 'https://api.github.com', url);
+  });
 });

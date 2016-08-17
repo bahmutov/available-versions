@@ -5,7 +5,15 @@ var la = require('lazy-ass');
 var check = require('check-more-types');
 var debug = require('debug')('vers');
 
-const githubUrl = 'https://api.github.com/repos/';
+function urlFromGitHub(user, repo) {
+  const githubUrl = 'https://api.github.com/repos/';
+  const url = githubUrl + user + '/' + repo + '/releases';
+  return url;
+}
+
+function supportedServer(type) {
+  return type === 'github';
+}
 
 function fetchReleaseNotes(available) {
   debug('available', available);
@@ -14,10 +22,15 @@ function fetchReleaseNotes(available) {
     debug('no parsed repo');
     return available;
   }
+  if (!supportedServer(available.repoParsed.server)) {
+    debug('do not know how to fetch releases from %s',
+      available.repoParsed.server);
+    return available;
+  }
 
-  const url = githubUrl + available.repoParsed.user + '/' +
-    available.repoParsed.repo + '/releases';
-  debug(url);
+  const url = urlFromGitHub(available.repoParsed.user,
+    available.repoParsed.repo);
+  debug('fetching releases from %s', url);
 
   return request.get(url)
     .then(function (r) {

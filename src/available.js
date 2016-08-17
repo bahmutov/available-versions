@@ -32,10 +32,27 @@ function formUrl(npmUrl, name) {
   return url;
 }
 
+function isGithubRepo(url) {
+  return url.indexOf('github') !== -1;
+}
+
+function isGitlabRepo(url) {
+  return url.indexOf('gitlab') !== -1;
+}
+
+function gitServerName(url) {
+  if (isGithubRepo(url)) {
+    return 'github';
+  }
+  if (isGitlabRepo(url)) {
+    return 'gitlab';
+  }
+}
+
 function isSupportedRepo(repo) {
   return check.object(repo) &&
     repo.type === 'git' &&
-    repo.url.indexOf('github') !== -1;
+    isGithubRepo(repo.url) || isGitlabRepo(repo.url);
 }
 
 function queryRegistry(query, silent, npmUrl) {
@@ -83,6 +100,7 @@ function queryRegistry(query, silent, npmUrl) {
           user: parsed[0],
           repo: parsed[1]
         };
+        result.repoParsed.server = gitServerName(info.repository.url);
       }
 
       var versionObject = info.versions || info.time;

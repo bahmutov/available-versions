@@ -48,7 +48,6 @@ function parseGitProtocol(url) {
 function parseGitSsh(url) {
   la(gitSsh.test(url), 'invalid', url);
   const removedGit = url.replace(gitSsh, 'https://');
-  console.log('removed', removedGit);
   return apiUrlFromParseable(removedGit);
 }
 
@@ -66,6 +65,9 @@ function server(url) {
   if (gitProtocol.test(url)) {
     return parseGitProtocol(url);
   }
+
+  // try simple parsing
+  return apiUrlFromParseable(url);
 }
 
 module.exports = server;

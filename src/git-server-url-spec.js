@@ -11,11 +11,18 @@ describe('git server url', function () {
     la(is.fn(server));
   });
 
-  it('returns gitlab url', function () {
+  it('returns gitlab git+https url', function () {
     var git = 'git+https://gitlab.com/hutson/semantic-release-gitlab.git';
     var url = server(git);
     la(is.unemptyString(url), 'returns a string', url);
     la(url === 'https://gitlab.com', url);
+  });
+
+  it('returns gitlab https url', function () {
+    var git = 'https://gitlab.team.com/foo/my-project.git';
+    var url = server(git);
+    la(is.unemptyString(url), 'returns a string', url);
+    la(url === 'https://gitlab.team.com', url);
   });
 
   it('returns gitlab git@ url', function () {
@@ -37,7 +44,7 @@ describe('git server url', function () {
   });
 
   it('returns github git+ssh url', function () {
-    var git = 'git+ssh://git@github.com/kensho/kensho-tickers.git';
+    var git = 'git+ssh://git@github.com/team/team-project.git';
     var url = server(git);
     la(url === 'https://api.github.com', url);
   });

@@ -24,7 +24,13 @@ describe('git server url', function () {
     la(url === 'https://gitlab.kensho.com', url);
   });
 
-  it('returns github url', function () {
+  it('returns github git url', function () {
+    var git = 'git://github.com/feross/standard.git';
+    var url = server(git);
+    la(url === 'https://api.github.com', url);
+  });
+
+  it('returns github git+https url', function () {
     var git = 'git+https://github.com/bahmutov/manpm.git';
     var url = server(git);
     la(url === 'https://api.github.com', url);

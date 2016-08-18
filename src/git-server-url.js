@@ -6,6 +6,7 @@ const parseUrl = require('url').parse;
 
 const gitHttps = /^git\+https:\/\//;
 const gitAt = /^git@/;
+const gitProtocol = /^git:\/\//;
 const gitSsh = /^git\+ssh:\/\/git@/;
 
 function isGitHub(hostname) {
@@ -38,6 +39,12 @@ function parseGitAt(url) {
   return 'https://' + parts[0];
 }
 
+function parseGitProtocol(url) {
+  la(gitProtocol.test(url), 'invalid', url);
+  const removedGit = url.replace(gitProtocol, 'https://');
+  return apiUrlFromParseable(removedGit);
+}
+
 function parseGitSsh(url) {
   la(gitSsh.test(url), 'invalid', url);
   const removedGit = url.replace(gitSsh, 'https://');
@@ -55,6 +62,9 @@ function server(url) {
   }
   if (gitAt.test(url)) {
     return parseGitAt(url);
+  }
+  if (gitProtocol.test(url)) {
+    return parseGitProtocol(url);
   }
 }
 

@@ -23,7 +23,8 @@
       "pre-commit": [
         "npm test",
         "npm run example",
-        "npm run example-scoped"
+        "npm run example-scoped",
+        "npm run example-standard"
       ],
       "pre-push": [
         "npm run size"
@@ -107,6 +108,7 @@
     "example-babel": "node bin/available.js babel@6.1.15",
     "example-gitlab": "DEBUG=vers as-a gitlab node bin/available.js semantic-release-gitlab",
     "example-scoped": "Q_DEBUG=1 node bin/available.js @bahmutov/parse-github-repo-url",
+    "example-standard": "node bin/available.js standard",
     "example-tags": "node bin/available.js publish-tag",
     "issues": "git-issues",
     "lint": "grunt jshint",

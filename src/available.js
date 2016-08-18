@@ -49,10 +49,34 @@ function gitServerName(url) {
   }
 }
 
+function isSupportedRepoType(url) {
+  return isGithubRepo(url) || isGitlabRepo(url);
+}
+
 function isSupportedRepo(repo) {
   return check.object(repo) &&
-    repo.type === 'git' &&
-    isGithubRepo(repo.url) || isGitlabRepo(repo.url);
+    (repo.type === 'git' && isSupportedRepoType(repo.url));
+}
+
+function attachRepoInformation(result, info) {
+  if (info.repository) {
+    debug('npm repo info');
+    debug(info.repository);
+  } else {
+    debug('no repo info in the npm package');
+  }
+  if (isSupportedRepo(info.repository)) {
+    result.repo = info.repository.url;
+    var parsed = parseRepo(info.repository.url);
+    result.repoParsed = {
+      user: parsed[0],
+      repo: parsed[1],
+      server: gitServerName(info.repository.url),
+      url: info.repository.url
+    };
+    debug('parsed repo info');
+    debug(result.repoParsed);
+  }
 }
 
 function queryRegistry(query, silent, npmUrl) {
@@ -91,20 +115,7 @@ function queryRegistry(query, silent, npmUrl) {
         deferred.reject(new Error(str));
         return;
       }
-      debug('npm repo info');
-      debug(info.repository);
-      if (isSupportedRepo(info.repository)) {
-        result.repo = info.repository.url;
-        var parsed = parseRepo(info.repository.url);
-        result.repoParsed = {
-          user: parsed[0],
-          repo: parsed[1],
-          server: gitServerName(info.repository.url),
-          url: info.repository.url
-        };
-        debug('parsed repo info');
-        debug(result.repoParsed);
-      }
+      attachRepoInformation(result, info);
 
       var versionObject = info.versions || info.time;
       la(check.object(versionObject), 'could not find versions in', info);

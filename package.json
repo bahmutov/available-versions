@@ -1,7 +1,7 @@
 {
   "name": "available-versions",
   "description": "Returns a promise with new versions higher than given for a npm module",
-  "version": "0.0.0-semantic-release",
+  "version": "0.0.0-development",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "bin": {
     "available": "bin/available.js",
@@ -64,7 +64,8 @@
     "matchdep": "1.0.1",
     "pre-git": "3.15.3",
     "rocha": "2.5.0",
-    "semantic-release": "6.2.2",
+    "semantic-release": "^7.0.2",
+    "snap-shot-it": "4.0.0",
     "time-grunt": "1.4.0"
   },
   "engines": {

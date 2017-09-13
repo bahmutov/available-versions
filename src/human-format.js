@@ -43,6 +43,7 @@ function versionsWithoutTimestamps(releases, tags) {
 function withTimestamps(versions, timestamps, tags) {
   la(versions.length === timestamps.length,
     'mismatch in numbers', versions, timestamps);
+  debug('withTimestamps tags: %j', tags)
 
   const now = moment();
   return versions.map(function (version, k) {
@@ -144,6 +145,7 @@ function toHumanFormat(releases) {
   la(is.maybe.object(distTags), 'wrong dist tags', distTags);
   const tags = is.object(distTags) ? _.invert(distTags) : undefined;
 
+  debug('has timestamps?', is.unemptyString(releases.timestamps));
   const result = releases.timestamps ?
     withTimestamps(releases.versions, releases.timestamps, tags) :
     versionsWithoutTimestamps(releases, tags);

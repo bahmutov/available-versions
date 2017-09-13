@@ -164,8 +164,12 @@ function toHumanFormat (releases) {
       // debug(release);
 
       if (release) {
-        r.release = release.body ? cleanReleaseNotesGitHub(release.body)
-          : cleanReleaseNotesGitLab(release.commit)
+        try {
+          r.release = release.body ? cleanReleaseNotesGitHub(release.body)
+            : cleanReleaseNotesGitLab(release.commit)
+        } catch (e) {
+          // ignore for now
+        }
       }
     })
   }

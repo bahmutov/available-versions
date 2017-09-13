@@ -1,65 +1,65 @@
-'use strict';
+'use strict'
 
-var check = require('check-more-types');
-var verify = check.verify;
-var semver = require('semver');
+var check = require('check-more-types')
+var verify = check.verify
+var semver = require('semver')
 
 var versionKeywords = {
   original: true,
   modified: true,
   created: true
-};
-
-function isKeyword(version) {
-  return check.string(version) &&
-    !!versionKeywords[version];
 }
 
-function clean(version, silent) {
-  var originalVersion = version;
-  verify.unemptyString(version, 'missing version string' + version);
+function isKeyword (version) {
+  return check.string(version) &&
+    !!versionKeywords[version]
+}
+
+function clean (version, silent) {
+  var originalVersion = version
+  verify.unemptyString(version, 'missing version string' + version)
 
   if (check.webUrl(version)) {
-    return;
+    return
   }
   if (isKeyword(version)) {
-    return;
+    return
   }
 
-  version = version.replace('~', '');
-  var twoDigitVersion = /^\d+\.\d+$/;
+  version = version.replace('~', '')
+  var twoDigitVersion = /^\d+\.\d+$/
   if (twoDigitVersion.test(version)) {
-    version += '.0';
+    version += '.0'
   }
   if (version === 'latest' || version === '*') {
-    return;
+    return
   }
   try {
-    version = semver.clean(version);
+    version = semver.clean(version)
   } catch (err) {
-    console.error('exception when cleaning version', version);
-    return;
+    console.error('exception when cleaning version', version)
+    return
   }
   if (!version) {
     if (!silent) {
-      console.error('could not clean version ' + originalVersion);
+      console.error('could not clean version ' + originalVersion)
     }
-    return;
+    return
   }
-  return version;
+  return version
 }
 
-function cleanVersion(version, name, silent) {
-  verify.unemptyString(version, 'missing version string' + version);
-  verify.unemptyString(name, 'missing name string' + name);
-  var cleaned = clean(version, silent);
+function cleanVersion (version, name, silent) {
+  verify.unemptyString(version, 'missing version string' + version)
+  verify.unemptyString(name, 'missing name string' + name)
+  var cleaned = clean(version, silent)
   if (!cleaned) {
     if (!isKeyword(version) && !silent) {
-      console.error('could not clean version', version, 'for', name);
+      console.error('could not clean version', version, 'for', name)
     }
-    return;
+    return
   }
-  return cleaned;
+  return cleaned
 }
 
-module.exports = cleanVersion;
+module.exports = cleanVersion

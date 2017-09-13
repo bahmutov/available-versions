@@ -3,17 +3,6 @@
 module.exports = function (grunt) {
 
   grunt.initConfig({
-    jshint: {
-      all: [
-        '*.js',
-        'src/*.js',
-        'bin/*.js'
-      ],
-      options: {
-        jshintrc: '.jshintrc'
-      }
-    },
-
     'nice-package': {
       all: {}
     }
@@ -22,5 +11,5 @@ module.exports = function (grunt) {
   var plugins = require('matchdep').filterDev('grunt-*');
   plugins.forEach(grunt.loadNpmTasks);
 
-  grunt.registerTask('default', ['jshint', 'nice-package']);
+  grunt.registerTask('default', ['nice-package']);
 };

@@ -2,6 +2,7 @@
 
 const la = require('lazy-ass');
 const is = require('check-more-types');
+var debug = require('debug')('vers');
 require('console.table');
 
 const toHumanFormat = require('./human-format');
@@ -13,6 +14,7 @@ function verifyReleases(releases) {
 }
 
 function printReleases(options, releases) {
+  debug('printing releases');
   verifyReleases(releases);
   const humanInfo = toHumanFormat(releases);
   la(is.array(humanInfo), 'could not construct human output from', releases);

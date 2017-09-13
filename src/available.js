@@ -104,6 +104,7 @@ function queryRegistry(query, silent, npmUrl) {
       console.error('ERROR when fetching info for package', name);
       return deferred.reject(new Error(err.message));
     }
+    debug('on NPM versions');
 
     var result = {};
 
@@ -115,6 +116,7 @@ function queryRegistry(query, silent, npmUrl) {
         deferred.reject(new Error(str));
         return;
       }
+      debug('attaching repo information');
       attachRepoInformation(result, info);
 
       var versionObject = info.versions || info.time;
@@ -130,6 +132,7 @@ function queryRegistry(query, silent, npmUrl) {
       });
 
       if (query.version) {
+        debug('have query version');
         la(check.string(query.version), 'missing version string, have', query.version);
         validVersions = validVersions.filter(function (ver) {
           var later = semver.gt(ver, query.version);

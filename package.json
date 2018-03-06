@@ -41,7 +41,7 @@
     "debug": "3.0.1",
     "lazy-ass": "1.6.0",
     "lodash": "4.17.4",
-    "moment": "2.18.1",
+    "moment": "2.19.3",
     "npm-utils": "2.0.0",
     "parse-github-repo-url": "1.4.1",
     "q": "1.4.1",

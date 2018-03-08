@@ -116,12 +116,12 @@
     "example-standard": "node bin/available.js standard",
     "example-tags": "node bin/available.js publish-tag",
     "issues": "git-issues",
-    "lint": "standard --verbose --fix src/*.js bin/*.js",
+    "lint": "standard --verbose --fix src/*.js src/test/*.js bin/*.js",
     "pretest": "npm run lint",
     "rocha": "rocha src/*-spec.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
     "test": "npm run rocha && grunt && npm run unit",
-    "unit": "gt src/test/*.js"
+    "unit": "rocha src/test/*.js"
   }
 }

@@ -1,7 +1,6 @@
 {
   "name": "available-versions",
-  "description":
-    "Returns a promise with new versions higher than given for a npm module",
+  "description": "Returns a promise with new versions higher than given for a npm module",
   "version": "0.0.0-development",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "bin": {
@@ -15,7 +14,9 @@
   },
   "config": {
     "next-update": {
-      "skip": ["q"]
+      "skip": [
+        "q"
+      ]
     },
     "pre-git": {
       "commit-msg": "simple",
@@ -25,7 +26,9 @@
         "npm run example-scoped",
         "npm run example-standard"
       ],
-      "pre-push": ["npm run size"],
+      "pre-push": [
+        "npm run size"
+      ],
       "post-commit": [],
       "post-merge": []
     }
@@ -70,7 +73,12 @@
   "engines": {
     "node": ">= 4.0.0"
   },
-  "files": ["bin", "src/*.js", "!src/*-spec.js", "!src/test"],
+  "files": [
+    "bin",
+    "src/*.js",
+    "!src/*-spec.js",
+    "!src/test"
+  ],
   "homepage": "https://github.com/bahmutov/available-versions",
   "keywords": [
     "available",
@@ -101,24 +109,19 @@
   "scripts": {
     "build": "grunt",
     "commit": "git-issues && commit-wizard",
-    "coveralls":
-      "node node_modules/lcov-filter/index.js cover/lcov.info test | ./node_modules/coveralls/bin/coveralls.js",
+    "coveralls": "node node_modules/lcov-filter/index.js cover/lcov.info test | ./node_modules/coveralls/bin/coveralls.js",
     "example": "node bin/available.js manpm",
     "example-babel": "node bin/available.js babel@6.1.15",
-    "example-gitlab":
-      "DEBUG=vers as-a gitlab node bin/available.js semantic-release-gitlab",
-    "example-scoped":
-      "Q_DEBUG=1 node bin/available.js @bahmutov/parse-github-repo-url",
+    "example-gitlab": "DEBUG=vers as-a gitlab node bin/available.js semantic-release-gitlab",
+    "example-scoped": "Q_DEBUG=1 node bin/available.js @bahmutov/parse-github-repo-url",
     "example-standard": "node bin/available.js standard",
     "example-tags": "node bin/available.js publish-tag",
     "issues": "git-issues",
     "lint": "standard --verbose --fix src/*.js src/test/*.js bin/*.js",
     "pretest": "npm run lint",
     "rocha": "rocha src/*-spec.js",
-    "semantic-release":
-      "semantic-release pre && npm publish && semantic-release post",
-    "size":
-      "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
     "test": "npm run rocha && grunt && npm run unit",
     "unit": "rocha src/test/*.js"
   }

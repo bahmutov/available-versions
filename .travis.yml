@@ -13,7 +13,6 @@ script:
   - npm run example-scoped
   - npm run example-standard
 after_success:
-  - npm run coveralls
   - npm run travis-deploy-once "npm run semantic-release"
 branches:
   except:

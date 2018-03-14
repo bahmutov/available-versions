@@ -51,7 +51,6 @@
   },
   "devDependencies": {
     "condition-node-version": "1.3.0",
-    "coveralls": "2.11.9",
     "git-issues": "1.3.1",
     "github-post-release": "1.13.1",
     "grunt": "0.4.5",
@@ -106,7 +105,6 @@
   "scripts": {
     "build": "grunt",
     "commit": "git-issues && commit-wizard",
-    "coveralls": "node node_modules/lcov-filter/index.js cover/lcov.info test | ./node_modules/coveralls/bin/coveralls.js",
     "example": "node bin/available.js manpm",
     "example-babel": "node bin/available.js babel@6.1.15",
     "example-gitlab": "DEBUG=vers as-a gitlab node bin/available.js semantic-release-gitlab",

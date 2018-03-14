@@ -1,7 +1,7 @@
 {
   "name": "available-versions",
   "description": "Returns a promise with new versions higher than given for a npm module",
-  "version": "0.13.3",
+  "version": "0.0.0-development",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "bin": {
     "available": "bin/available.js",
@@ -65,10 +65,12 @@
     "matchdep": "1.0.1",
     "pre-git": "3.15.3",
     "rocha": "2.5.0",
-    "semantic-release": "8.0.0",
+    "semantic-release": "^15.0.3",
+    "simple-commit-message": "4.0.3",
     "snap-shot-it": "4.0.0",
     "standard": "10.0.3",
-    "time-grunt": "1.4.0"
+    "time-grunt": "1.4.0",
+    "travis-deploy-once": "^4.4.0"
   },
   "engines": {
     "node": ">= 4.0.0"
@@ -95,12 +97,7 @@
   "preferGlobal": true,
   "release": {
     "branch": "master",
-    "verifyConditions": {
-      "path": "condition-node-version",
-      "node": "8"
-    },
-    "analyzeCommits": "simple-commit-message",
-    "generateNotes": "github-post-release"
+    "analyzeCommits": "simple-commit-message"
   },
   "repository": {
     "type": "git",
@@ -120,9 +117,10 @@
     "lint": "standard --verbose --fix src/*.js src/test/*.js bin/*.js",
     "pretest": "npm run lint",
     "rocha": "rocha src/*-spec.js",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "semantic-release": "semantic-release",
     "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
     "test": "npm run rocha && grunt && npm run unit",
-    "unit": "rocha src/test/*.js"
+    "unit": "rocha src/test/*.js",
+    "travis-deploy-once": "travis-deploy-once"
   }
 }

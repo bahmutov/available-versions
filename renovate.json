@@ -6,5 +6,9 @@
       "excludePackagePatterns": ["^axios"],
       "enabled": false
     }
-  ]
+  ],
+  "automerge": true,
+  "major": {
+    "automerge": false
+  }
 }

@@ -6,8 +6,6 @@ Fetches new versions for a given NPM package higher than given version.
 
 [![Build status][ci-image]][ci-url]
 [![Coverage Status][available-versions-coverage-image]][available-versions-coverage-url]
-[![dependencies][dependencies-image]][dependencies-url]
-[![dev dependencies][dev-dependencies-image]][dev-dependencies-url]
 [![semantic-release][semantic-image] ][semantic-url]
 [![manpm](https://img.shields.io/badge/manpm-%E2%9C%93-3399ff.svg)](https://github.com/bahmutov/manpm)
 
@@ -153,9 +151,5 @@ OTHER DEALINGS IN THE SOFTWARE.
 [ci-url]: https://travis-ci.org/bahmutov/available-versions
 [available-versions-coverage-image]: https://coveralls.io/repos/bahmutov/available-versions/badge.svg
 [available-versions-coverage-url]: https://coveralls.io/r/bahmutov/available-versions
-[dependencies-image]: https://david-dm.org/bahmutov/available-versions.svg
-[dependencies-url]: https://david-dm.org/bahmutov/available-versions
-[dev-dependencies-image]: https://david-dm.org/bahmutov/available-versions/dev-status.svg
-[dev-dependencies-url]: https://david-dm.org/bahmutov/available-versions#info=devDependencies
 [semantic-image]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 [semantic-url]: https://github.com/semantic-release/semantic-release

@@ -1,7 +1,7 @@
 {
   "name": "available-versions",
   "description": "Returns a promise with new versions higher than given for a npm module",
-  "version": "0.13.2",
+  "version": "0.13.3",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "bin": {
     "available": "bin/available.js",

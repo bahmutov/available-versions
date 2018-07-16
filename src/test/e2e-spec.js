@@ -30,7 +30,7 @@ it('@bahmutov/csv with scope', function () {
 
 la('deps-ok as string', function () {
   return available('deps-ok')
-  .then(function (info) {
-    la(info.name === 'deps-ok')
-  })
+    .then(function (info) {
+      la(info.name === 'deps-ok')
+    })
 })

@@ -21,6 +21,7 @@ it('deps-ok with version', function () {
 })
 
 it('@bahmutov/csv with scope', function () {
+  this.timeout(30000)
   return available({
     name: '@bahmutov/csv'
   }).then(function (info) {
@@ -29,8 +30,7 @@ it('@bahmutov/csv with scope', function () {
 })
 
 la('deps-ok as string', function () {
-  return available('deps-ok')
-    .then(function (info) {
-      la(info.name === 'deps-ok')
-    })
+  return available('deps-ok').then(function (info) {
+    la(info.name === 'deps-ok')
+  })
 })

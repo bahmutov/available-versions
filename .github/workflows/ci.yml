@@ -1,0 +1,42 @@
+name: ci
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v3
+
+      - name: Install everything 📦
+        # https://github.com/bahmutov/npm-install
+        uses: bahmutov/npm-install@v1
+
+      - name: Run tests 🧪
+        run: npm test
+      - name: Build 🏗️
+        run: npm run build
+      - name: Example 1 💎
+        run: npm run example
+      - name: Example 2 scoped 💎
+        run: npm run example-scoped
+      - name: Example 3 standard 💎
+        run: npm run example-standard
+
+  release:
+    needs: [test]
+    runs-on: ubuntu-20.04
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v3
+
+      - name: Install only the semantic release 📦
+        run: npm install semantic-release
+
+      - name: Semantic Release 🚀
+        uses: cycjimmy/semantic-release-action@v3
+        with:
+          branch: master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

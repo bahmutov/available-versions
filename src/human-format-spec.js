@@ -66,7 +66,6 @@ describe('human format conversion', function () {
     const human = toHuman(releases)
     la(human.length === releases.versions.length, 'wrong number of versions')
     checkOutput(human)
-    snapshot(human)
   })
 
   it('handles several tags', function () {

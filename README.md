@@ -4,7 +4,7 @@ Fetches new versions for a given NPM package higher than given version.
 
 [![NPM][available-versions-icon]][available-versions-url]
 
-[![Build status][ci-image]][ci-url]
+[![ci](https://github.com/bahmutov/available-versions/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/bahmutov/available-versions/actions/workflows/ci.yml)
 [![semantic-release][semantic-image] ][semantic-url]
 [![manpm](https://img.shields.io/badge/manpm-%E2%9C%93-3399ff.svg)](https://github.com/bahmutov/manpm)
 
@@ -108,9 +108,14 @@ To debug this program, run it with `DEBUG=vers` variable
 
 Author: Gleb Bahmutov &copy; 2014
 
-* [@bahmutov](https://twitter.com/bahmutov)
-* [glebbahmutov.com](https://glebbahmutov.com)
-* [blog](https://glebbahmutov.com/blog)
+- [@bahmutov](https://twitter.com/bahmutov)
+- [glebbahmutov.com](https://glebbahmutov.com)
+- [blog](https://glebbahmutov.com/blog)
+- [videos](https://www.youtube.com/glebbahmutov)
+- [presentations](https://slides.com/bahmutov)
+- [cypress.tips](https://cypress.tips)
+- [Cypress Tips & Tricks Newsletter](https://cypresstips.substack.com/)
+- [my Cypress courses](https://cypress.tips/courses)
 
 License: MIT - do anything with the code, but don't blame me if it does not work.
 
@@ -146,7 +151,5 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 [available-versions-icon]: https://nodei.co/npm/available-versions.svg?downloads=true
 [available-versions-url]: https://npmjs.org/package/available-versions
-[ci-image]: https://travis-ci.org/bahmutov/available-versions.svg?branch=master
-[ci-url]: https://travis-ci.org/bahmutov/available-versions
 [semantic-image]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 [semantic-url]: https://github.com/semantic-release/semantic-release

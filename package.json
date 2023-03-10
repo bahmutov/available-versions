@@ -107,6 +107,7 @@
     "example": "node bin/available.js manpm",
     "example-babel": "node bin/available.js babel@6.1.15",
     "example-gitlab": "DEBUG=vers as-a gitlab node bin/available.js semantic-release-gitlab",
+    "example-not-found": "node bin/available.js not-found-module-name",
     "example-scoped": "Q_DEBUG=1 node bin/available.js @bahmutov/parse-github-repo-url",
     "example-standard": "node bin/available.js standard",
     "example-tags": "node bin/available.js publish-tag",

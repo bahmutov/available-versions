@@ -25,7 +25,7 @@ function formUrl (npmUrl, name) {
   la(check.unemptyString(name), 'missing name string', name)
 
   la(check.webUrl(npmUrl), 'need npm registry url, got', npmUrl)
-  npmUrl = npmUrl.replace(/^https:/, 'http:').trim()
+  npmUrl = npmUrl.trim()
 
   // for scoped package names that have @user/foo
   var url = npmUrl + name.replace('/', '%2f')
@@ -111,9 +111,14 @@ function queryRegistry (query, silent, npmUrl) {
     try {
       var info = JSON.parse(body)
       if (info.error) {
-        var str = 'ERROR in npm info for ' + name + ' reason ' + (info.reason || body)
-        console.error(str)
-        deferred.reject(new Error(str))
+        debug(info.error)
+        if (info.error === 'Not found') {
+          deferred.reject(new Error('Not found'))
+        } else {
+          var str = 'ERROR in npm info for ' + name + ' reason ' + (info.reason || body)
+          console.error(str)
+          deferred.reject(new Error(str))
+        }
         return
       }
       debug('attaching repo information')
@@ -172,7 +177,11 @@ function fetchVersions (query, silent) {
   }
   la(check.object(query), 'expected {name, version}')
   var scope = scopeName(query.name)
-  debug('fetching versions for scope', scope)
+  if (scope) {
+    debug('fetching versions for scope', scope)
+  } else {
+    debug('fetching versions for global scope')
+  }
   var queryFn = _.partial(queryRegistry, query, Boolean(silent))
   return registryUrl(scope)
     .then(queryFn)

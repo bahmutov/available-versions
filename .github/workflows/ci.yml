@@ -21,6 +21,8 @@ jobs:
         run: npm run example-scoped
       - name: Example 3 standard 💎
         run: npm run example-standard
+      - name: Example 4 not found 💎
+        run: npm run example-not-found
 
       - name: Audit dependencies 🔎
         run: npm run deps || echo "ughh, need to bump dependencies"

@@ -32,6 +32,11 @@ available(options, hideDebugOutput)
   .then(fetchReleaseNotes)
   .then(print)
   .catch(function (err) {
-    console.error('available versions error')
-    console.error(err)
+    if (err.message === 'Not found') {
+      console.error('Cannot find NPM module "%s"', packageName)
+      console.error('Please check module name spelling')
+    } else {
+      console.error('available versions error')
+      console.error(err)
+    }
   })

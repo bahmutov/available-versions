@@ -25,6 +25,8 @@ What are new releases after `1.0.0`?
     releases lazy-ass@1.0.0
     releases lazy-ass 1.0.0
 
+The module always exits with 0, even if the NPM module was not found.
+
 ## Output
 
 A table with versions, timestamps and relative age

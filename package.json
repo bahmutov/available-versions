@@ -41,10 +41,10 @@
     "debug": "4.3.4",
     "lazy-ass": "1.6.0",
     "lodash": "4.17.21",
-    "moment": "2.19.3",
+    "moment": "2.29.4",
     "npm-utils": "2.0.3",
     "parse-github-repo-url": "1.4.1",
-    "q": "1.4.1",
+    "q": "1.5.1",
     "request": "2.88.2",
     "semver": "5.5.0",
     "simple-bin-help": "1.7.1"

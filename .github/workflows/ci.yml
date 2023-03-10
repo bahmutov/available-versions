@@ -23,7 +23,7 @@ jobs:
         run: npm run example-standard
 
       - name: Audit dependencies 🔎
-        run: npm audit --report --omit dev || echo "ughh, need to bump dependencies"
+        run: npm run deps || echo "ughh, need to bump dependencies"
 
   release:
     needs: [test]

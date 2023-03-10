@@ -22,6 +22,9 @@ jobs:
       - name: Example 3 standard 💎
         run: npm run example-standard
 
+      - name: Audit dependencies 🔎
+        run: npm audit --report --omit dev || echo "ughh, need to bump dependencies"
+
   release:
     needs: [test]
     runs-on: ubuntu-20.04
